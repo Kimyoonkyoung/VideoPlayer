@@ -182,7 +182,9 @@ public class MainActivity extends AppCompatActivity
 
         mVideoPlayer = new VideoPlayer(mSurface, this);
         mVideoPlayer.setOnAudioStreamInterface(this);
-        mVideoPlayer.setUrlString("/storage/emulated/0/DCIM/Camera/test.mp4");
+        //mVideoPlayer.setUrlString("/storage/emulated/0/DCIM/Camera/test.mp4");
+       // mVideoPlayer.setUrlString("/storage/emulated/0/Pictures/POP/pop_20170222_131218.mp4"); //1
+        mVideoPlayer.setUrlString("/storage/emulated/0/Pictures/POP/pop_20170222_131331.mp4"); //0
 
         try
         {
@@ -328,8 +330,8 @@ public class MainActivity extends AppCompatActivity
     {
         if (this.isSeekBarTouch) {
             //progress = seekBar.getProgress();
-            //int testProgress = seekBar.getProgress();
-           // this.mVideoPlayer.seekTo(testProgress);
+            int testProgress = seekBar.getProgress();
+            this.mVideoPlayer.seekTo(testProgress);
         }
     }
 
@@ -344,9 +346,9 @@ public class MainActivity extends AppCompatActivity
     {
         this.isSeekBarTouch = false;
 
-        int progress = seekBar.getProgress();
+        //int progress = seekBar.getProgress();
 
-        this.mVideoPlayer.seekTo(progress);
+        //this.mVideoPlayer.seekTo(progress);
     }
 
     @Override

@@ -189,6 +189,7 @@ public class VideoPlayer implements SensorEventListener {
         int noOutputCounterLimit = 50;
 
         int frameCnt = 0;
+        long t =0;
         while (!sawInputEOS && noOutputCounter < noOutputCounterLimit && !isForceStop) //TODO 내가 완전종료할때까지 걍 계속 돌면서, sensor가 정상이면 수행
         {
             if (!sawInputEOS)
@@ -198,7 +199,7 @@ public class VideoPlayer implements SensorEventListener {
                     isPause = false;
                     //long t = seekTime * 1000 * 1000;  //TODO : frame count 로 들어오는 인풋을 시간으로 변경해주기 (전체시간*현재frame)/전체frame
                     frameCnt = seekTime;
-                    long t = (long)((duration * seekTime) / (totalSec * 30));
+                    t = (long)((duration * seekTime) / (totalSec * 30));
                     Log.d(TAG, "extractor Seek --> seekTime : " + seekTime + " totalSec : " + t);
                     mExtractor.seekTo(t, MediaExtractor.SEEK_TO_CLOSEST_SYNC);
                     isSeek = false;
@@ -243,7 +244,7 @@ public class VideoPlayer implements SensorEventListener {
 
                     if (!sawInputEOS)
                     {
-                        mExtractor.advance();
+                        //mExtractor.advance();
                     }
                 }
                 else
@@ -279,7 +280,7 @@ public class VideoPlayer implements SensorEventListener {
                 Log.d(TAG, " release Otput Buffer ");
                 mMediaCodec.releaseOutputBuffer(outputBufIndex, true); //TODO 여기서 버퍼가 화면에 풀림
                 //mVideoPlayerHandler.onVideoPlayerPause();
-                //isPause = true;
+                isPause = true;
             }
             else if (res == MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED)
             {
